@@ -12,7 +12,7 @@ def get_quote():
   '''
   Function that get the json response to our url request
   '''
-  get_quote_url = base_url.format
+  get_quote_url = base_url.format()
   with urllib.request.urlopen(get_quote_url) as url:
     get_quote_data = url.read()
     get_quote_response = json.loads(get_quote_data)

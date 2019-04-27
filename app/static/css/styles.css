@@ -1,5 +1,8 @@
 body{
-  font-family: 'Acme', sans-serif;  
+  font-family: 'Acme', sans-serif; 
+  background-image: linear-gradient(to right top, #beb3b3, #9a9092, #776e73, #554e55, #343139, #35323a, #35323a, #36333b, #595159, #7e7278, #a49599, #cbbaba);
+  color: white;
+
 }
 html,
 body,
@@ -24,11 +27,17 @@ height: 100%;
   background-color: transparent;
 }
 .top-nav-collapse {
-  background-color: #4285F4;
+  background-color: rgb(158,53,53);
 }
 @media only screen and (max-width: 768px) {
   .navbar {
-      background-color: #4285F4;
+      background-color: rgb(158,53,53);
   }
 }
-
+.quote{
+  color:rgb(166,44,44);
+  border: white;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.4);
+  padding: 1rem;
+}

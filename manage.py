@@ -17,5 +17,5 @@ def test():
 def make_shell_context():
   return dict(app=app)
 
-if __name__ = '__main__':
-  manger.run()
+if __name__=='__main__':
+  manager.run()

@@ -2,7 +2,7 @@ from . import main
 from flask import render_template,request,redirect,url_for,abort,flash
 from ..request import get_quote
 from ..models import Blog,User,Comment
-from .forms import BlogForm,UpdateProfile,CommentForm
+from .forms import BlogForm,UpdateProfile,CommentForm,DeleteForm
 from .. import db,photos
 from flask_login import login_required,current_user
 
@@ -39,6 +39,22 @@ def new_blog():
     return redirect(url_for('main.index',id=new_blog.id))
 
   return render_template('new_blog.html',title='Add Your Blog',blog_form=form)
+
+@main.route('/delete_blog/<int:id>',methods =['POST'])
+@login_required
+def delete_blog(id):
+  form = DeleteForm()
+
+  if form.validate_on_submit():
+    del_blog = Blog.query.filter_by(id=id).first()
+
+    db.session.delete(del_blog)
+    db.session.commit()
+
+    flash('Your Blog has been deleted...','success')
+    return redirect(url_for('main.index'))
+    
+  return render_template('index.html',delete_form=form)
 
 
 @main.route('/user/<uname>')
@@ -102,3 +118,15 @@ def comment_review(id):
     abort(404)
   
   return render_template('blog_comments.html',comment_form=comment,post=post,comments=comments,blog=blog,user=user)
+
+@main.route('/delete_comment/<int:id>',methods=['POST'])
+@login_required
+def delete_comment(id):
+  
+  del_comment = Comment.query.get(id)
+
+  db.session.delete(del_comment)
+  db.session.commit() 
+
+  flash('Comment Deleted','success')
+  return redirect(url_for('main.comment_review'))

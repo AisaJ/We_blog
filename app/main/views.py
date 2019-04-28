@@ -1,6 +1,10 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort,flash
 from ..request import get_quote
+from ..models import Blog,User
+from .forms import BlogForm,UpdateProfile
+from .. import db
+from flask_login import login_required,current_user
 
 @main.route('/')
 def index():
@@ -15,7 +19,7 @@ def index():
   return render_template('index.html',quote=random_quote,lifestyle=lifestyle,fitness=fitness,trending=trending,tech=tech)
 
 
-@main.route('/pitch/new',methods = ['GET','POST'])
+@main.route('/blog/new',methods = ['GET','POST'])
 @login_required
 def new_blog():
   form = BlogForm()
@@ -23,9 +27,10 @@ def new_blog():
   if form.validate_on_submit():
     title=form.title.data
     category = form.category.data
-    blog = form.blog.data
-    blogger = current_user
-    new_blog = Blog(title=title,category=category,blog=blog,blogger=current_user._get_current_object().id)
+    blog = form.blog_post.data
+    blogger = form.blog.data
+    user = current_user
+    new_blog = Blog(title=title,category=category,blog=blog,user=current_user._get_current_object().id)
 
     db.session.add(new_blog)
     db.session.commit()

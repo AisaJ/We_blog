@@ -36,10 +36,46 @@
             <h4 class="card-title">Topic: {{blog.title}}</h4>
             <p class="card-body"><img src="https://img.icons8.com/ios-glyphs/24/000000/quote-left.png" width="30"> {{blog.blog}} </p>
             <footer><cite><p>Posted by <b>{{blog.author}}</b></p></cite></footer>
-            <p class="card-footer"><button class="btn btn-light comment">Comments</button></p>
+            <p class="card-footer"><a href="/comments/{{blog.id}}"><button class="btn btn-light comment">Comments</button></a></p>
           </div>
           {% endfor %}
-        </div>            
+        </div>       
+        
+        <div class="row blog-sec2">
+          <h3 class="categ"> Health & Fitness </h3>
+          {% for blog in fitness %}
+          <div class="card blog-post1">
+            <h4 class="card-title">Topic: {{blog.title}}</h4>
+            <p class="card-body"><img src="https://img.icons8.com/ios-glyphs/24/000000/quote-left.png" width="30"> {{blog.blog}} </p>
+            <footer><cite><p>Posted by <b>{{blog.author}}</b></p></cite></footer>
+            <p class="card-footer"><a href="/comments/{{blog.id}}"><button class="btn btn-light comment">Comments</button></a></p>
+          </div>
+          {% endfor %}
+        </div>  
+
+        <div class="row blog-sec1">
+          <h3 class="categ"> Trends </h3>
+          {% for blog in trending %}
+          <div class="card blog-post">
+            <h4 class="card-title">Topic: {{blog.title}}</h4>
+            <p class="card-body"><img src="https://img.icons8.com/ios-glyphs/24/000000/quote-left.png" width="30"> {{blog.blog}} </p>
+            <footer><cite><p>Posted by <b>{{blog.author}}</b></p></cite></footer>
+            <p class="card-footer"><a href="/comments/{{blog.id}}"><button class="btn btn-light comment">Comments</button></a></p>
+          </div>
+          {% endfor %}
+        </div> 
+        
+        <div class="row blog-sec2">
+          <h3 class="categ"> Technology </h3>
+          {% for blog in tech %}
+          <div class="card blog-post1">
+            <h4 class="card-title">Topic: {{blog.title}}</h4>
+            <p class="card-body"><img src="https://img.icons8.com/ios-glyphs/24/000000/quote-left.png" width="30"> {{blog.blog}} </p>
+            <footer><cite><p>Posted by <b>{{blog.author}}</b></p></cite></footer>
+            <p class="card-footer"><a href="/comments/{{blog.id}}"><button class="btn btn-light comment">Comments</button></a></p>
+          </div>
+          {% endfor %}
+        </div>  
       </div>
       <div class="col-md-1"></div>
     </div>

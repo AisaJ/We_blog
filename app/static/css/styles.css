@@ -51,14 +51,28 @@ padding-top: 5%;
 .form-blog{
   padding-top: 5%;
 }
+.comment-area{
+  padding-top: 5%;
+  padding-bottom:30%;
+}
 .blog-sec1{
   background-color:  rgba(230,173,216, 0.6);
   color: black;  
+}
+.blog-sec2{
+  background-color:  rgba(173,216,230,0.6);
+  color: white;
 }
 .blog-post{
   margin: 2%;
   background-color: rgba(173,216,230,0.6);
   padding: 1%;
+}
+.blog-post1{
+  margin: 2%;
+  background-color: rgba(230,173,216, 0.6);
+  padding: 1%;
+  color: black;
 }
 #blogs{
   margin-right: 40%;
@@ -70,4 +84,7 @@ padding-top: 5%;
   padding: 1%;
   margin-right: 40%;
   margin-left: 40%;
+}
+.page-footer{
+  background-color: transparent;
 }

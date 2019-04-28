@@ -80,3 +80,25 @@ def update_pic(uname):
     db.session.commit()
 
   return redirect(url_for('main.profile',uname=uname))
+
+
+@main.route('/comments/<int:id>',methods=['GET','POST'])
+def comment_review(id):
+  comment = CommentForm()
+  blog=Blog.query.get(id)
+
+  if comment.validate_on_submit():
+    content = comment.comment.data
+    
+    new_post = Comment(comment=content,topic=blog.id)
+
+    db.session.add(new_post)
+    db.session.commit()  
+    
+  post = 'Share Your Sentiments'
+  user=User.query.get(id)
+  comments = Comment.query.filter_by(topic=blog.id).all()  
+  if blog is None:
+    abort(404)
+  
+  return render_template('blog_comments.html',comment_form=comment,post=post,comments=comments,blog=blog,user=user)

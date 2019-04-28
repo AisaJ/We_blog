@@ -1,45 +1,46 @@
 body{
   font-family: 'Acme', sans-serif; 
-  background-image: linear-gradient(to right top, #beb3b3, #9a9092, #776e73, #554e55, #343139, #35323a, #35323a, #36333b, #595159, #7e7278, #a49599, #cbbaba);
+  background-image: linear-gradient(to right top, #e6add8, #d5b7e7, #c3c1f0, #b4caf2, #acd1ef, #acd1ef, #acd1ef, #acd1ef, #b4caf2, #c3c1f0, #d5b7e7, #e6add8);
+  background-size: cover;
+  background-repeat: no-repeat;
   color: white;
+  font-size: 1.5rem; 
 }
-html,
-body,
-header,
 .view {
-height: 100%;
+height: 37rem;
+padding-top: 5%;
 }
 .view {
   background: url("../images/pen.jpeg")no-repeat center center;
   background-size: cover;
 }
-@media (min-width: 768px) {
-  .view {
-      overflow: visible;
-      margin-top: -56px;
-  }
-}
 .navbar {
-  z-index: 8;
+  z-index: 1;
 }
 .navbar {
   background-color: transparent;
 }
 .top-nav-collapse {
-  background-color: rgb(158,53,53);
+  background-color:  rgb(173,216,230);
 }
 @media only screen and (max-width: 768px) {
   .navbar {
-      background-color: rgb(158,53,53);
+      background-color:  rgb(173,216,230);
   }
 }
 .quote{
-  color:rgb(166,44,44);
-  border: white;
+  color:white;
+  border: rgb(173,216,230);
   border-radius: 20px;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(173,216,230, 0.5);
   padding: 1rem;
+  margin-left: 20%;
+  margin-right: 20%;
 }
 #title{
   font-size: 4rem;
+}
+.form-login{
+  padding-top: 5%;
+  padding-bottom: 20%;
 }

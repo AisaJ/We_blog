@@ -1,5 +1,7 @@
 from flask import render_template,redirect,url_for,flash,request
 from . import auth
+from .forms import RegistrationForm,LoginForm
+from ..models import Blog,User
 
 @auth.route('/login',methods = ['GET','POST'])
 def login():

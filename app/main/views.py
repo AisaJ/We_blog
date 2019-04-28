@@ -1,9 +1,9 @@
 from . import main
 from flask import render_template,request,redirect,url_for,abort,flash
 from ..request import get_quote
-from ..models import Blog,User
-from .forms import BlogForm,UpdateProfile
-from .. import db
+from ..models import Blog,User,Comment
+from .forms import BlogForm,UpdateProfile,CommentForm
+from .. import db,photos
 from flask_login import login_required,current_user
 
 @main.route('/')

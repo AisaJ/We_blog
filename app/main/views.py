@@ -28,9 +28,9 @@ def new_blog():
     title=form.title.data
     category = form.category.data
     blog = form.blog_post.data
-    blogger = form.blog.data
-    user = current_user
-    new_blog = Blog(title=title,category=category,blogger=bloggert,blog=blog,author=current_user._get_current_object().id)
+    writer= form.writer.data
+    blogger = current_user
+    new_blog = Blog(title=title,category=category,blog=blog,blogger=current_user._get_current_object().id)
 
     db.session.add(new_blog)
     db.session.commit()

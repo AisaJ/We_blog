@@ -2,7 +2,7 @@ from . import main
 from flask import render_template,request,redirect,url_for,abort,flash
 from ..request import get_quote
 from ..models import Blog,User,Comment
-from .forms import BlogForm,UpdateProfile,CommentForm,DeleteForm
+from .forms import BlogForm,UpdateProfile,CommentForm
 from .. import db,photos
 from flask_login import login_required,current_user
 
@@ -43,18 +43,16 @@ def new_blog():
 @main.route('/delete_blog/<int:id>',methods =['POST'])
 @login_required
 def delete_blog(id):
-  form = DeleteForm()
-
-  if form.validate_on_submit():
-    del_blog = Blog.query.filter_by(id=id).first()
-
-    db.session.delete(del_blog)
-    db.session.commit()
-
-    flash('Your Blog has been deleted...','success')
-    return redirect(url_for('main.index'))
+  
+  blog = Blog.query.get_or_404(id)
+  if blog.blogger != current_user:
+    abort(403)
+  db.session.delete(blog)
+  db.session.commit()
+  flash('Your post has been deleted!', 'success')
+  return redirect(url_for('main.index'))
     
-  return render_template('index.html',delete_form=form)
+  return render_template('index.html')
 
 
 @main.route('/user/<uname>')
@@ -119,14 +117,40 @@ def comment_review(id):
   
   return render_template('blog_comments.html',comment_form=comment,post=post,comments=comments,blog=blog,user=user)
 
-@main.route('/delete_comment/<int:id>',methods=['POST'])
+@main.route('/delete_comment/<blog_id>/<comment_id>',methods=['POST'])
 @login_required
-def delete_comment(id):
+def delete_comment(blog_id,comment_id): 
   
-  del_comment = Comment.query.get(id)
+  # blog = Blog.query.filter_by(id = blog_id).first()
+  # comments = Comment.query.filter_by(topic = blog.id).order_by(Comment.posted.desc())
+  # comment = Comment.query.filter_by(id = comment_id).first()
+  # if blog.user_id == current_user.id:
 
-  db.session.delete(del_comment)
-  db.session.commit() 
+  #   Comment.delete_comment(comment)
 
-  flash('Comment Deleted','success')
-  return redirect(url_for('main.comment_review'))
+  # return render_template('blog_comments.html', blog = blog, comments = comments)
+  comment_form = CommentForm()
+  blog=Blog.query.get(id)
+  comment = Comment.query.filter_by(id = comment_id).first()
+  comments = Comment.query.filter_by(topic=blog.id).all()
+
+  if comment.validate_on_submit():
+    content = comment.comment.data
+    
+    new_post = Comment(comment=content,topic=blog.id)
+
+    db.session.add(new_post)
+    db.session.commit()  
+
+  if blog.user_id == current_user.id:
+
+    Comment.delete_comment(comment)
+    return redirect('main.comment_review')
+    
+  post = 'Share Your Sentiments'
+  user=User.query.get(id)
+    
+  if blog is None:
+    abort(404)
+  
+  return render_template('blog_comments.html',comment_form=comment_form,post=post,comments=comments,blog=blog,user=user)

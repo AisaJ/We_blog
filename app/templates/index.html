@@ -37,7 +37,14 @@
             <h4 class="card-title">Topic: {{blog.title}}</h4>
             <p class="card-body"><img src="https://img.icons8.com/ios-glyphs/24/000000/quote-left.png" width="30"> {{blog.blog}} </p>
             <footer><cite><p>Posted by <b>{{blog.author}}</b></p></cite></footer>
-            <p class="card-footer"><a href="/comments/{{blog.id}}"><button class="btn btn-light comment">Comments</button></a></p>
+            <p class="card-footer"><a href="/comments/{{blog.id}}"><button class="btn btn-light comment">Comments</button></a>
+              {% if blog.blogger == current_user %}
+
+              <form action="{{ url_for('main.delete_blog', id=blog.id) }}" method="POST">
+                  <input class="btn btn-danger" type="submit" value="Delete">
+              </form>
+              {% endif %}
+            </p>
             
           </div>
           {% endfor %}

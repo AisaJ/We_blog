@@ -24,12 +24,10 @@
           <h4 class="card-title">{{blog.title}}</h4>
           <p class="card-body">" ...{{post.comment}} "</p>
           <p class="card-footer"><b>..{{user.username}}</b>'s blog</p>
-        </div> 
-        <form action="{{url_for('main.delete_comment',id=post.id)}}" method="POST">
-          <input type="hidden" name="method" value="DELETE">
-          <input type="submit" value="Delete" class="btn btn-danger">
-        </form> 
+        </div>
         
+        <a href="{{url_for('main.delete_comment',blog_id = post.id, comment_id = post.comment.id)}}"><button type="button" name="button" class="btn btn-warning">Delete Comment</button></a>
+
         {% endfor %}
       </div>
   </div>  
